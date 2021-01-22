@@ -2,7 +2,6 @@ package service;
 
 
 import org.glassfish.grizzly.http.server.HttpServer;
-import org.glassfish.grizzly.http.server.StaticHttpHandler;
 import org.glassfish.grizzly.websockets.WebSocketAddOn;
 import org.glassfish.grizzly.websockets.WebSocketEngine;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
@@ -37,14 +36,6 @@ class Publisher {
 
 
             HttpServer webSocketServer = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, customApplicationConfig, false);
-
-
-//            HttpServer server = GrizzlyHttpServerFactory.createHttpServer(baseUri, resourceConfig,false);
-
-            // setup static file handler so that we can also serve html pages.
-            StaticHttpHandler staticHandler = new StaticHttpHandler("static");
-            staticHandler.setFileCacheEnabled(false);
-            webSocketServer.getServerConfiguration().addHttpHandler(staticHandler,"/static/");
 
             // Create websocket addon
             WebSocketAddOn webSocketAddOn = new WebSocketAddOn();

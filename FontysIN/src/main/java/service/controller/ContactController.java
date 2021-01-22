@@ -40,7 +40,6 @@ public class ContactController {
         List<ContactDTO> acceptedContacts;
         try {
             acceptedContacts = contactsRepository.getAcceptedContactsDTO(id);
-            System.out.println("Accepted contact repository");
 
             return acceptedContacts;
         }
@@ -81,7 +80,6 @@ public class ContactController {
         }
         catch (DatabaseException | URISyntaxException e) {
             e.printStackTrace();
-            System.out.println(e.getMessage());
         }
         return contactId;
     }
@@ -106,6 +104,7 @@ public class ContactController {
      *
      * @param contactId
      * @param contact
+     * @return true or false
      */
     public boolean updateContact(int contactId, ContactDTO contact) {
         boolean result = false;
@@ -149,7 +148,12 @@ public class ContactController {
     }
 
 
-
+    /**
+     *
+     * @param firstUserId
+     * @param secondUserId
+     * @return contact
+     */
     public ContactDTO getContactDTO(int firstUserId, int secondUserId) {
         ContactDTO contactDTO;
         try {

@@ -31,7 +31,6 @@ public class MessagesResources {
     public Response getConversation(@PathParam("id") int id, @PathParam("conversationId") int conversationId) { // returns a conversation
         Conversation conversations = messageController.getConversation(conversationId);
 
-
         return Response.ok(conversations).build();
     }
 
@@ -50,7 +49,6 @@ public class MessagesResources {
     @Path("user/{userId}/conversation/{conversationId}")
     @PermitAll
     public Response deleteConversation(@PathParam("userId") int userId, @PathParam("conversationId") int conversationId) {
-
         messageController.DeleteConversation(userId, conversationId);
 
         return Response.noContent().build();

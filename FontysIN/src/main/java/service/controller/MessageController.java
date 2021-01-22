@@ -89,13 +89,8 @@ public class MessageController {
 
         int conversationId = -1;
         try {
-            if (!messagesRepository.restartNewConversation(conversationDTO)){
-                conversationId = messagesRepository.startConversation(conversationDTO);
-            }
-            else{
-                conversationId = messagesRepository.startConversation(conversationDTO);
-            }
-
+            messagesRepository.restartNewConversation(conversationDTO);
+            conversationId = messagesRepository.startConversation(conversationDTO);
         } catch (DatabaseException | URISyntaxException e) {
             e.printStackTrace();
         }

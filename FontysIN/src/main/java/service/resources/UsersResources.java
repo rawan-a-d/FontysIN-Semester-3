@@ -43,9 +43,7 @@ public class UsersResources {
 		ProfileRepository repository = new ProfileRepository();
 		User u = repository.getUser();
 		return Response.ok(u).build();
-		//return Response.ok("ok").build();
 	}
-
 
 
 	@GET //GET at http://localhost:XXXX/users/1/contacts
@@ -107,7 +105,6 @@ public class UsersResources {
 		int contactId = contactController.createContact(contact);
 
 		if (contactId < 0){ // already friends
-			//String entity =  "You and user with id " + contact.getFriendId() + " are already connected.";
 			String entity =  "You and user with id " + contact.getFriend().getId() + " are already connected.";
 
 			return Response.status(Response.Status.CONFLICT).entity(entity).build();
@@ -142,8 +139,6 @@ public class UsersResources {
 	@PermitAll
 	@Path("{userId}")
 	public Response getUser(@PathParam("userId") int userId) {
-//		User userInToken = userController.getUserFromToken(auth);
-
 		UserDTO user = contactController.getUserDTO(userId);
 
 		if(user != null){
@@ -187,7 +182,6 @@ public class UsersResources {
 			};
 
 			return Response.ok(entity).build();
-
 		}
 	}
 
@@ -725,6 +719,7 @@ public class UsersResources {
 		User user = persistenceController.getUserByEmail(email);
 		if (persistenceController.login(email, password)) {
 			String userId = Integer.toString(user.getId());
+			System.out.println(userId);
 			String token = persistenceController.createJWT(userId, user.getFirstName(),user.getLastName(), -1);
 			return Response.ok(token).build();
 		} else {
@@ -770,24 +765,6 @@ public class UsersResources {
 			return Response.ok(entity).build();
 		}
 	}
-
-//	@PermitAll
-//	@POST //POST at http://localhost:XXXX/profile/experience
-//	@Path("newAddress")
-//	public Response createAddress(Address address) throws DatabaseException, SQLException {
-//
-//		ProfileController profileController = new ProfileController();
-//
-////		int id = profileController.createAddress(address);
-//		if (id == 0)
-//		{
-//			String entity =  "Address Id is zero";
-//			return Response.status(Response.Status.CONFLICT).entity(entity).build();
-//		} else {
-//			return Response.ok(id).build();
-//		}
-//	}
-
 
 	// to add a new experience
 	@PermitAll

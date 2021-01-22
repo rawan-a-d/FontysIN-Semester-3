@@ -21,14 +21,10 @@ public class ContactsRepository {
     public int createContact(ContactDTO createdContactDTO) throws DatabaseException, URISyntaxException {
         Connection connection = jdbcRepository.getDatabaseConnection();
 
-//        String sql = "INSERT INTO contacts (userId, friendId) " +
-//                "SELECT ?, ? WHERE NOT EXISTS (SELECT userId, friendId FROM contacts " +
-//                "WHERE (userId = ? AND friendId = ?) OR (userId = ? AND friendId = ?))";
         String sql = "INSERT INTO contacts (userId, friendId) " +
                         "SELECT ?, ? FROM DUAL " +
                         "WHERE NOT EXISTS ( " +
                         "SELECT userId, friendId FROM contacts WHERE (userId = ? AND friendId = ?) OR (userId = ? AND friendId = ?) LIMIT 1)";
-
 
         try {
             int contactId = -1;
@@ -221,7 +217,7 @@ public class ContactsRepository {
                 "LEFT JOIN profiles AS p1 ON p1.userId = user.id " +
                 "LEFT JOIN profiles AS p2 ON p2.userId = friend.id " +
                 "WHERE (friend.id = ?) AND contacts.isAccepted = false " +
-                "GROUP BY contacts.id";
+                "GROUP BY contacts.id, p2.id";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);

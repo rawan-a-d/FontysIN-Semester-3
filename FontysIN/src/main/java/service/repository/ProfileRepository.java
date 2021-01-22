@@ -2,8 +2,6 @@ package service.repository;
 
 import service.model.*;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -408,19 +406,8 @@ public class ProfileRepository extends JDBCRepository {
                 int locationId = resultSet.getInt("locationId");
                 int departmentId = resultSet.getInt("departmentId");
                 String userNumber = resultSet.getString("userNumber");
-                UserType r = UserType.Teacher;
-                if (userType == "student")
-                {
-                    r = UserType.Student;
-                }
-                else if (userType == "employee")
-                {
-                    r = UserType.Teacher;
-                }
-                else  if (userType == "admin")
-                {
-                    r = UserType.FontysStaff;
-                }
+                UserType r = UserType.valueOf(userType);
+
 
                 User u = new User(id, firstName, lastName, r, email, password, locationId, departmentId,  userNumber, image);
                 allUsers.add(u);
