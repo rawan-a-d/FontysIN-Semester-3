@@ -165,7 +165,7 @@ public class MessagesRepository extends JDBCRepository {
 
         String sql = "SELECT c.id AS conversationId, c.firstUserId, c.secondUserId, " +
                 "user.id AS userId, user.firstName AS userFirstName, user.lastName AS userLastName, user.image AS userImage, p1.userProfileId, " +
-                "riend.id AS friendId, friend.firstName AS friendFirstName, friend.lastName AS friendLastName, friend.image AS friendImage, p2.friendProfileId " +
+                "friend.id AS friendId, friend.firstName AS friendFirstName, friend.lastName AS friendLastName, friend.image AS friendImage, p2.friendProfileId " +
                 "FROM conversations AS c " +
                 "LEFT JOIN users user ON c.firstUserId = user.id " +
                 "LEFT JOIN users friend ON c.secondUserId = friend.id " +
