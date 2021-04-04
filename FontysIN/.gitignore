@@ -151,3 +151,9 @@ gradle-app.setting
 **/build/
 
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle,intellij
+/src/main/resources/app.properties
+/src/main/resources/
+.suo
+slnx.sqlite
+VSWorkspaceState.json
+
